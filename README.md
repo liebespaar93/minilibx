@@ -2,15 +2,15 @@
 
 수정사항
 
-# /* minilibx_macos */
+### /* minilibx_macos */
 
-# / Makefile /
-# Origin
-# 8	CFLAGS+=-O2
-# Fix
-# 8	CFLAGS+=-O2 -Wno-deprecated-declarations
+/ Makefile /  
+Origin   
+8	CFLAGS+=-O2  
+Fix  
+8	CFLAGS+=-O2 -Wno-deprecated-declarations  
 
-# /* minilibx_mms_20191025_beta */
+### /* minilibx_mms_20191025_beta */
 
 # / interface.swift /
 # Origin

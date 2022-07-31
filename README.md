@@ -32,7 +32,6 @@ Origin
 24		eventFuncts.append(Optional.none)  
 25		eventParams.append(UnsafeMutableRawPointer(&keyrepeat)) /// dummy address here, null not needed  
 26	}  
-
 Fix  
 22	var ptr = UnsafeMutableRawPointer(bitPattern:1)!  
 23	ptr -= 1  

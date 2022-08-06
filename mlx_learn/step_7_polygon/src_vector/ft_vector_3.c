@@ -1,55 +1,59 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_vector_2.c                                      :+:      :+:    :+:   */
+/*   ft_vector_3.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kyoulee <kyoulee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/05 17:41:15 by kyoulee           #+#    #+#             */
-/*   Updated: 2022/08/07 05:26:42 by kyoulee          ###   ########.fr       */
+/*   Created: 2022/08/07 00:18:18 by kyoulee           #+#    #+#             */
+/*   Updated: 2022/08/07 00:18:27 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_vector.h>
 #include <ft_src.h>
 
-t_vec2	ft_vector_2(float x, float y)
+t_vec3	ft_vector_3(float x, float y, float z)
 {
-	t_vec2	new;
+	t_vec3	new;
 
 	new.x = x;
 	new.y = y;
+	new.z = z;
 	return (new);
 }
 
-t_vec2	ft_vec2_sum(t_vec2 v2_1, t_vec2 v2_2)
+t_vec3	ft_vec3_sum(t_vec3 v3_1, t_vec3 v3_2)
 {
-	v2_1.x += v2_2.x;
-	v2_1.y += v2_2.y;
-	return (v2_1);
+	v3_1.x += v3_2.x;
+	v3_1.y += v3_2.y;
+	v3_1.z += v3_2.z;
+	return (v3_1);
 }
 
-t_vec2	ft_vec2_mult(t_vec2 v2, float scalar)
+t_vec3	ft_vec3_mult(t_vec3 v3, float scalar)
 {
-	v2.x *= scalar;
-	v2.y *= scalar;
-	return (v2);
+	v3.x *= scalar;
+	v3.y *= scalar;
+	v3.z *= scalar;
+	return (v3);
 }
 
-float	ft_vec2_length(t_vec2 v2)
+float	ft_vec3_length(t_vec3 v3)
 {
 	float	temp;
 
-	temp = ft_sqrt(v2.x * v2.x + v2.y * v2.y);
+	temp = ft_sqrt(v3.x * v3.x + v3.y * v3.y + v3.z * v3.z);
 	return (temp);
 }
 
-t_vec2	ft_vec2_normalize(t_vec2 v2)
+t_vec3	ft_vec3_normalize(t_vec3 v3)
 {
 	float	length;
 
-	length = ft_vec2_length(v2);
-	v2.x = v2.x / length;
-	v2.y = v2.y / length;
-	return (v2);
+	length = ft_vec3_length(v3);
+	v3.x = v3.x / length;
+	v3.y = v3.y / length;
+	v3.z = v3.z / length;
+	return (v3);
 }

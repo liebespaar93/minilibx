@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 17:16:54 by kyoulee           #+#    #+#             */
-/*   Updated: 2022/08/06 23:45:39 by kyoulee          ###   ########.fr       */
+/*   Updated: 2022/08/07 02:53:38 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,68 +18,60 @@
 #include <ft_mac_keyboard.h>
 #include <ft_loop.h>
 #include <ft_matrix.h>
+#include <ft_polygon.h>
 
 void	ft_draw2_line(t_param *param)
 {
-	t_vec2		v0;
-
-	v0 = ft_vector_2(2, 1);
 	ft_draw_basis2_grid(param, 20, 20, 0x00336600);
 	ft_draw_basis2_axis(param, 20, 20, 0x00669900);
-	ft_draw_line(param, v0, ft_vector_2(4, 2), 0x00FFCC66);
 }
 
-void	ft_draw_mtx3_transform(t_param *param)
+void	ft_make_buffers(t_prim **prim_buff_ptr, t_vec3 **v3_buff_ptr)
 {
-	t_vec2		v0;
-	t_vec2		v1;
-	t_mtx3		m3_rotation;
-	t_mtx3		m3_translation;
+	t_prim	*prim_buff;
+	t_vec3	*v3_buff;
 
-	v0 = ft_vector_2(0, 0);
-	v1 = ft_vector_2(2, 1);
-	m3_rotation = ft_mtx3_rotation(C_PI * param->mouse->x_angle / 180);
-	m3_translation = ft_mtx3_translation(2, 1);
-	ft_draw_line(param, \
-		ft_mtx3_mult_vec2(m3_translation, ft_mtx3_mult_vec2(m3_rotation, v0)),
-		ft_mtx3_mult_vec2(m3_translation, ft_mtx3_mult_vec2(m3_rotation, v1)),
-		0x00FF0099
-		);
-	param->screan->origin.x += 3;
-	ft_draw_line(param, \
-		ft_mtx3_mult_vec2(ft_mtx3_mult_mtx3(m3_translation, m3_rotation), v0),
-		ft_mtx3_mult_vec2(ft_mtx3_mult_mtx3(m3_translation, m3_rotation), v1),
-		0x00CC33
-		);
-	param->screan->origin.x -= 3;
+	if (!ft_zeromalloc((void **)&prim_buff, sizeof(t_prim) * 2))
+		return ;
+	if (!ft_zeromalloc((void **)&v3_buff, sizeof(t_prim) * 4))
+		return ;
+	prim_buff[0] = ft_primitive(0, 1, 2);
+	prim_buff[1] = ft_primitive(1, 2, 3);
+	v3_buff[0] = ft_vector_3(-5, -5, 0);
+	v3_buff[1] = ft_vector_3(5, -5, 0);
+	v3_buff[2] = ft_vector_3(-5, 5, 0);
+	v3_buff[3] = ft_vector_3(5, 5, 0);
+	*prim_buff_ptr = prim_buff;
+	*v3_buff_ptr = v3_buff;
 }
 
-void	ft_draw_mtx3_transform_wrong(t_param *param)
+void	ft_draw_ply(t_param *param, t_prim	*prim_buff, t_vec3	*v3_buff)
 {
-	t_vec2		v0;
-	t_vec2		v1;
-	t_mtx3		m3_rotation;
-	t_mtx3		m3_translation;
+	t_ply	*ply;
+	t_prim	prim;
+	int		i;
 
-	v0 = ft_vector_2(0, 0);
-	v1 = ft_vector_2(2, 1);
-	m3_rotation = ft_mtx3_rotation(C_PI * param->mouse->x_angle / 180);
-	m3_translation = ft_mtx3_translation(2, 1);
-	ft_draw_line(param, \
-		ft_mtx3_mult_vec2(m3_rotation, ft_mtx3_mult_vec2(m3_translation, v0)),
-		ft_mtx3_mult_vec2(m3_rotation, ft_mtx3_mult_vec2(m3_translation, v1)),
-		0x00FF00FF
-		);
-	ft_draw_line(param, \
-		ft_vec2_mult_mtx3(ft_vec2_mult_mtx3(v0, m3_rotation), m3_translation),
-		ft_vec2_mult_mtx3(ft_vec2_mult_mtx3(v1, m3_rotation), m3_translation),
-		0x003333FF
-		);
-	ft_draw_line(param, \
-		ft_vec2_mult_mtx3(ft_vec2_mult_mtx3(v0, m3_translation), m3_rotation),
-		ft_vec2_mult_mtx3(ft_vec2_mult_mtx3(v1, m3_translation), m3_rotation),
-		0x0000FFFF
-		);
+	ply = ft_polygon_init();
+	ft_make_buffers(&prim_buff, &v3_buff);
+	ft_ply_set_primbuffer(ply, prim_buff, 2);
+	ft_ply_set_vbuffer(ply, v3_buff, 4);
+	i = -1;
+	while (++i < ply->size_prim)
+	{
+		prim = ply->prim_buff[i];
+		ft_draw_line(param, \
+		ft_vector_2(ply->v3_buff[prim.p1].x, ply->v3_buff[prim.p1].y), \
+		ft_vector_2(ply->v3_buff[prim.p2].x, ply->v3_buff[prim.p2].y), \
+		0x00FFCC66);
+		ft_draw_line(param, \
+		ft_vector_2(ply->v3_buff[prim.p2].x, ply->v3_buff[prim.p2].y), \
+		ft_vector_2(ply->v3_buff[prim.p3].x, ply->v3_buff[prim.p3].y), \
+		0x00FFCC66);
+		ft_draw_line(param, \
+		ft_vector_2(ply->v3_buff[prim.p3].x, ply->v3_buff[prim.p3].y), \
+		ft_vector_2(ply->v3_buff[prim.p1].x, ply->v3_buff[prim.p1].y), \
+		0x00FFCC66);
+	}
 }
 
 int	ft_loop_event(t_param *param)
@@ -88,8 +80,7 @@ int	ft_loop_event(t_param *param)
 	ft_mouse_update(param->screan, param->mouse);
 	ft_memset(param->back_buffer, 0, param->size_line * CANVAS_HEIGHT);
 	ft_draw2_line(param);
-	ft_draw_mtx3_transform(param);
-	ft_draw_mtx3_transform_wrong(param);
+	ft_draw_ply(param, 0, 0);
 	ft_memcpy(param->buffer, param->back_buffer, \
 		param->size_line * CANVAS_HEIGHT);
 	mlx_put_image_to_window(param->mlx_ptr, param->win_ptr, \

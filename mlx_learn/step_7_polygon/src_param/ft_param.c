@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 17:46:47 by kyoulee           #+#    #+#             */
-/*   Updated: 2022/08/06 16:45:09 by kyoulee          ###   ########.fr       */
+/*   Updated: 2022/08/07 07:12:42 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ t_param	*ft_param_init(void)
 		return (NULL);
 	param->mlx_ptr = mlx_init();
 	param->win_ptr = mlx_new_window(param->mlx_ptr, WIN_WIDTH, WIN_HEIGHT, \
-		"mlx_learn step 6 by kyoulee");
+		"mlx_learn step 7 by kyoulee");
 	param->img_ptr = mlx_new_image(param->mlx_ptr, CANVAS_WIDTH, CANVAS_HEIGHT);
 	param->buffer = mlx_get_data_addr(param->img_ptr, &param->bits_per_pixel, \
 		&param->size_line, &param->endian);

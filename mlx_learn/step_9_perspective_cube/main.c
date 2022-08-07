@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 17:16:54 by kyoulee           #+#    #+#             */
-/*   Updated: 2022/08/08 02:30:34 by kyoulee          ###   ########.fr       */
+/*   Updated: 2022/08/08 02:32:48 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	ft_make_buffers(t_prim **prim_buff_ptr, t_vec3 **v3_buff_ptr)
 		return ;
 	if (!ft_zeromalloc((void **)&v3_buff, sizeof(t_prim) * 8))
 		return ;
-	ft_prim_cube(&prim_buff, (int [8]){0,1,2,3,4,5,6,7});
+	ft_prim_cube(&prim_buff, (int [8]){0, 1, 2, 3, 4, 5, 6, 7});
 	v3_buff[0] = ft_vector_3(-1, -1, 1);
 	v3_buff[1] = ft_vector_3(1, -1, 1);
 	v3_buff[2] = ft_vector_3(-1, 1, 1);

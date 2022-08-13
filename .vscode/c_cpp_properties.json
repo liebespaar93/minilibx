@@ -3,7 +3,7 @@
         {
             "name": "Mac",
             "includePath": [
-                "${workspaceFolder}/mlx_learn/step_6_homogeneous_matrix3/**",
+                "${workspaceFolder}/mlx_learn/step_10_perspective_inner_dot/**",
             ],
             "defines": [],
             "macFrameworkPath": [

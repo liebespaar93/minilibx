@@ -8,7 +8,7 @@
 			"name": "(lldb) 시작",
 			"type": "cppdbg",
 			"request": "launch",
-			"program": "/Users/kyoulee/Documents/git/minilibx/mlx_learn/step_6_homogeneous/a.out",
+			"program": "/Users/kyoulee/Documents/git/minilibx/mlx_learn/step_10_perspective_inner_dot/a.out",
 			"args": [],
 			"stopAtEntry": false,
 			"cwd": "${fileDirname}",

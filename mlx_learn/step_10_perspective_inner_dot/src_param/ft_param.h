@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 17:45:48 by kyoulee           #+#    #+#             */
-/*   Updated: 2022/08/06 00:47:56 by kyoulee          ###   ########.fr       */
+/*   Updated: 2022/08/08 12:35:10 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef struct s_param
 	int			size_line;
 	int			endian;
 
+	t_vec3		camera;
 	t_screan	*screan;
 	t_basis2	*basis2;
 	t_mtx2		m2_angle;

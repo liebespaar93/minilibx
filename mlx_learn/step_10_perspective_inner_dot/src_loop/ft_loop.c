@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 22:11:21 by kyoulee           #+#    #+#             */
-/*   Updated: 2022/08/06 01:49:38 by kyoulee          ###   ########.fr       */
+/*   Updated: 2022/08/08 12:07:30 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_key_update(t_screan *screan, t_keyboard *keyboard)
 	v2 = ft_vector_2(keyboard->x, keyboard->y);
 	screan->origin = ft_vec2_sum(screan->origin, v2);
 	screan->axis_1.x += keyboard->zoom;
-	screan->axis_2.y -= keyboard->zoom;
+	screan->axis_2.y += keyboard->zoom;
 }
 
 void	ft_mouse_update(t_screan *screan, t_mouse *mouse)
@@ -31,7 +31,7 @@ void	ft_mouse_update(t_screan *screan, t_mouse *mouse)
 	screan->origin = ft_vec2_sum(screan->origin, \
 		ft_vector_2((float)mouse->x_move, (float)mouse->y_move));
 	screan->axis_1.x += mouse->zoom;
-	screan->axis_2.y -= mouse->zoom;
+	screan->axis_2.y += mouse->zoom;
 	mouse->zoom = 0;
 }
 
